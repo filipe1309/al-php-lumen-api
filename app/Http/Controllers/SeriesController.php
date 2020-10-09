@@ -16,7 +16,7 @@ class SeriesController extends BaseController
 
     public function store(Request $request)
     {
-        return response()->json(Serie::create(['nome' => $request->nome]), Response::HTTP_CREATED);
+        return response()->json(Serie::create($request->all()), Response::HTTP_CREATED);
     }
 
     public function show(int $id)
@@ -26,6 +26,19 @@ class SeriesController extends BaseController
         if (is_null($serie)) {
             return response()->json(null, Response::HTTP_NO_CONTENT);
         }
+
+        return response()->json($serie);
+    }
+
+    public function update(int $id, Request $request)
+    {
+        $serie = Serie::find($id);
+        if (is_null($serie)) {
+            return response()->json(['error' => 'Recurso nao encontrado'], Response::HTTP_NOT_FOUND);
+        }
+
+        $serie->fill($request->all());
+        $serie->save();
 
         return response()->json($serie);
     }

@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+    laravelcontainer:
+        container_name: laravelcontainer
+        build: .
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes: 
+            - .:/var/www/html
+
+#docker run --rm --name laravelcontainer  -itv %CD%:/var/www/html -w /var/www/html -p 8080:8080 php -S 0.0.0.0:8080 -t public
+#$ docker run -dit --name my-apache-app -p 8080:80 -v "$PWD":/usr/local/apache2/htdocs/ httpd:2.4

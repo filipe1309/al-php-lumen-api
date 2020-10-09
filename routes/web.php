@@ -16,3 +16,19 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->get('/', function () use ($router) {
+    return $router->app->version();
+});
+
+// $router->get('/series', function () use ($router) {
+//     return [
+//         'Breaking Bad',
+//         'The Office'
+//     ];
+// });
+
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->get('/series', 'SeriesController@index');
+});

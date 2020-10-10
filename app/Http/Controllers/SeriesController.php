@@ -42,4 +42,14 @@ class SeriesController extends BaseController
 
         return response()->json($serie);
     }
+
+    public function destroy(int $id)
+    {
+        $qtdRecursosRemovidas = Serie::destroy($id);
+        if ($qtdRecursosRemovidas === 0) {
+            return response()->json(['error' => 'Recurso nao encontrado'], Response::HTTP_NOT_FOUND);
+        }
+
+        return response()->json(null, Response::HTTP_NO_CONTENT);
+    }
 }
